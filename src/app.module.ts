@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { UsuariosModule } from './modulos/usuarios/usuarios.module';
 import { Usuario } from './modulos/usuarios/entities/usuario.entity';
 
@@ -17,18 +16,6 @@ import { Usuario } from './modulos/usuarios/entities/usuario.entity';
       synchronize: true,
       autoLoadEntities: true,
     }),
-    
-    // CONEXIÓN AL OTRO MICROSERVICIO (TCP Client)
-    ClientsModule.register([
-      {
-        name: 'CLIENTES_SERVICE', 
-        transport: Transport.TCP,
-        options: {
-          host: 'localhost', 
-          port: 3000, // Puerto donde mod_clientes va a ESCUCHAR
-        },
-      },
-    ]),
     UsuariosModule,
   ],
 })
