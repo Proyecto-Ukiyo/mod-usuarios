@@ -1,19 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
-import { Perfil } from '../../perfiles/entities/perfiles.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+// import { Empleado } from '../../empleados/entities/empleado.entity'; 
 
-@Entity('usuarios')
+@Entity('usuario')
 export class Usuario {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column()
-  nombre: string;
+  @Column({ unique: true })
+  username: string;
 
-  @Column()
-  email: string;
+  @Column({ name: 'password' })
+  password: string;
+  
+  // Referencia al ID del cliente en la BD_Clientes (sin relación TypeORM)
+  @Column({ name: 'cliente_id', type: 'uuid', nullable: true })
+  clienteId: string; 
 
-  // Relación 1:1 con Perfil
-  @OneToOne(() => Perfil, perfil => perfil.usuario, { cascade: true, eager: true })
-  @JoinColumn() // crea la FK en la tabla usuarios
-  perfil: Perfil;
+  // Ejemplo de relación interna con Perfiles
+  // @OneToMany(() => Perfil, (perfil) => perfil.usuario)
+  // perfiles: Perfil[]; 
 }
