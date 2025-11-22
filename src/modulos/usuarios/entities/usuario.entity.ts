@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-// import { Empleado } from '../../empleados/entities/empleado.entity'; 
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 
 @Entity('usuario')
 export class Usuario {
@@ -16,7 +15,9 @@ export class Usuario {
   @Column({ name: 'cliente_id', type: 'uuid', nullable: true })
   clienteId: string; 
 
-  // Ejemplo de relación interna con Perfiles
-  // @OneToMany(() => Perfil, (perfil) => perfil.usuario)
-  // perfiles: Perfil[]; 
+  // Relación con Empleado
+  empleado: any;
+
+  // Relación con Perfil
+  perfil: any;
 }

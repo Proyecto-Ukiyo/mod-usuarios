@@ -13,6 +13,10 @@ export class UsuariosService {
     @Inject('CLIENTES_SERVICE') private readonly clientesClient: ClientProxy,
   ) {}
 
+  async findAll() {
+    return this.usuariosRepository.find();
+  }
+
   async getPerfilCompleto(idInterno: string) {
     const usuario = await this.usuariosRepository.findOne({ where: { id: idInterno } });
 
