@@ -7,11 +7,11 @@ import { Usuario } from './modulos/usuarios/entities/usuario.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '194.163.170.169', // IP VPS
-      port: 5433, // Puerto diferente si está en la misma máquina
-      username: 'user_usuarios',
-      password: 'password_usuarios',
-      database: 'bd_usuarios',
+      host: process.env.DB_HOST, 
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       entities: [Usuario],
       synchronize: true,
       autoLoadEntities: true,
