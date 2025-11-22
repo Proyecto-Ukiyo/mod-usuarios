@@ -1,21 +1,23 @@
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
+
+COPY package.json ./
+
+RUN npm pkg set devDependencies.typescript="^5.1.3"
+RUN npm pkg set devDependencies.@nestjs/cli="^10.0.0"
+
+RUN rm -f package-lock.json
+RUN npm install
 
 COPY . .
 
-RUN rm -rf package-lock.json node_modules
-
-RUN npm install
-
-RUN npm install -D @nestjs/cli@latest typescript@latest
-
 RUN npm run build
 
-FROM node:18-alpine AS production
+FROM node:20-alpine AS production
 WORKDIR /app
 
-COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/package.json ./
 COPY --from=builder /app/dist ./dist
 COPY .env .
 
