@@ -15,6 +15,8 @@ export class Usuario {
   @Column({ name: 'cliente_id', type: 'uuid', nullable: true })
   clienteId: string; 
 
+  // ESTO LO HE PUESTO SOLAMENTE PARA QUE NO HAYA CONFLICTO CON LOS DEMÁS ENTITIES
+  
   // Relación con Empleado
   empleado: any;
 

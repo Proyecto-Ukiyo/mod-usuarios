@@ -15,7 +15,8 @@ export class UsuariosService {
   }
 
   async findOne(id: string) {
-    return this.usuariosRepository.findOne({ where: { id } });
+    // return this.usuariosRepository.findOne({ where: { id } });
+    return id;
   }
 
   async getPerfilCompleto(idInterno: string) {
