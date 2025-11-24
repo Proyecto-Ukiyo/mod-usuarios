@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
@@ -10,16 +10,15 @@ export class UsuariosService {
     private usuariosRepository: Repository<Usuario>,
   ) {}
 
-  async findAll() {
-    return this.usuariosRepository.find();
-  }
-
   async findOne(id: string) {
-    return { id };
+    return await this.usuariosRepository.findOne({ where: { id } });
   }
 
-  async getPerfilCompleto(idInterno: string) {
-    const usuario = await this.usuariosRepository.findOne({ where: { id: idInterno } });
-    return usuario;
+  async create(data: any) {
+    // Crea la instancia del usuario
+    const nuevoUsuario = this.usuariosRepository.create(data);
+    
+    // Guarda en la BD
+    return await this.usuariosRepository.save(nuevoUsuario);
   }
 }

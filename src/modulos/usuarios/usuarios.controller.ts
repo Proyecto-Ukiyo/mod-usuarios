@@ -6,9 +6,16 @@ import { UsuariosService } from './usuarios.service';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
+  //obtener usuario
   @MessagePattern({ cmd: 'get_usuario' })
   async getUsuario(@Payload() id: string) {
     return this.usuariosService.findOne(id);
+  }
+
+  //crear usuario
+  @MessagePattern({ cmd: 'create_usuario' })
+  createUsuario(@Payload() data: any) {
+    return this.usuariosService.create(data);
   }
   
 }
