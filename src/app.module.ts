@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuariosModule } from './modulos/usuarios/usuarios.module';
 import { Usuario } from './modulos/usuarios/entities/usuario.entity';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { Usuario } from './modulos/usuarios/entities/usuario.entity';
       autoLoadEntities: true,
     }),
     UsuariosModule,
+    SeedModule,
   ],
 })
 export class AppModule {}

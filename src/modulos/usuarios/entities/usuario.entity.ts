@@ -13,7 +13,7 @@ export class Usuario {
   
   // Referencia al ID del cliente en la BD_Clientes (sin relación TypeORM)
   @Column({ name: 'cliente_id', type: 'uuid', nullable: true })
-  clienteId: string; 
+  clienteId: string | null; 
 
   // ESTO LO HE PUESTO SOLAMENTE PARA QUE NO HAYA CONFLICTO CON LOS DEMÁS ENTITIES
   
