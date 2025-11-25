@@ -12,7 +12,7 @@ export class SeedService {
 
     async runSeed() {
         // limpiar bd
-        await this.usuarioRepository.delete({});
+        await this.usuarioRepository.clear();
 
         // datos de prueba
         const usuarios = [
